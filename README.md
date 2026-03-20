@@ -22,6 +22,7 @@
 - [Deterministic vs. Probabilistic](#deterministic-vs-probabilistic)
 - [Tools](#tools) — organized by what you should do first
 - [Key Concepts](#key-concepts)
+- [Contributing](CONTRIBUTING.md)
 
 ---
 
@@ -213,6 +214,6 @@ Organized deterministic-first, probabilistic-later — matching the analysis abo
 
 **[Interactive site with attack chains, checklists, and agent stack analysis &rarr;](https://yayashuxue.github.io/awesome-ai-auth/)**
 
-Contributions welcome! Open a PR or issue.
+Contributions welcome! See **[CONTRIBUTING.md](CONTRIBUTING.md)** for guidelines.
 
 </div>
