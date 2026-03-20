@@ -159,6 +159,7 @@ Organized deterministic-first, probabilistic-later — matching the analysis abo
 *Network-level controls: sandboxes, allowlists, and OS hardening.*
 
 - **[NemoClaw](https://github.com/NVIDIA/NemoClaw)** 🦞 ![](https://img.shields.io/github/stars/NVIDIA/NemoClaw?style=flat-square&label=%E2%98%85) — NVIDIA's enterprise OpenClaw security stack (GTC March 2026). **OpenShell** sandbox with policy-based security & network guardrails. **Privacy router** for cloud models. Runs locally on RTX/DGX.
+- **[OpenShell](https://github.com/NVIDIA/OpenShell)** 🦞 ![](https://img.shields.io/github/stars/NVIDIA/OpenShell?style=flat-square&label=%E2%98%85) — NVIDIA's isolated sandbox runtime for AI agents. Policy-based process isolation, network guardrails, and minimal-privilege execution. Part of the OpenClaw security stack.
 - **[IronShell](https://github.com/Surfing-Claw/IronShell)** 🦞 ![](https://img.shields.io/github/stars/Surfing-Claw/IronShell?style=flat-square&label=%E2%98%85) — AWS CDK hardened hosting. Zero open ports, Tailscale VPN, time-limited secrets via AWS Secrets Manager.
 - **[IronClaw](https://github.com/nearai/ironclaw)** 🦞 ![](https://img.shields.io/github/stars/nearai/ironclaw?style=flat-square&label=%E2%98%85) — Rust AI assistant. AES-256-GCM, WASM sandbox, URL allowlist, active leak detection on all I/O.
 
