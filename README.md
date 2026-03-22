@@ -80,7 +80,7 @@ The credential **never reaches the LLM**. No prompt trick can extract what isn't
 |--------|-------------------|-------|
 | **Credential broker** | LLM says "query DB", broker makes the call. LLM never sees the password. | [Vault-MCP](#step-1-keep-secrets-out-of-llm-context-det), [AgentPassVault](#step-1-keep-secrets-out-of-llm-context-det), [1Password](#step-2-use-a-real-vault-det), [AgentGateway](#step-3-give-agents-identities-not-keys-det), [Mozilla any-llm](#step-1-keep-secrets-out-of-llm-context-det) |
 | **Network allowlist** | Firewall blocks `fetch(evil.com)` at OS level, not LLM "deciding" not to. | [IronClaw](#step-4-harden-the-infrastructure-det), [IronShell](#step-4-harden-the-infrastructure-det), [NemoClaw](#step-4-harden-the-infrastructure-det) |
-| **WASM/container sandbox** | No network socket = no exfiltration. Period. | [IronClaw](#step-4-harden-the-infrastructure-det), [NemoClaw](#step-4-harden-the-infrastructure-det), gVisor, Firecracker |
+| **WASM/container sandbox** | No network socket = no exfiltration. Period. | [IronClaw](#step-4-harden-the-infrastructure-det), [NemoClaw](#step-4-harden-the-infrastructure-det), [gVisor](https://github.com/google/gvisor), [Firecracker](https://github.com/firecracker-microvm/firecracker) |
 | **Auto-expiring tokens** | Leaked token expires in minutes. Math, not hope. | [HashiCorp Vault](#step-2-use-a-real-vault-det), [Aembit](#step-3-give-agents-identities-not-keys-det), [Infisical](#step-2-use-a-real-vault-det) |
 | **Hard HITL gate** | System blocks until human approves. Not "LLM asks permission". | [AgentPassVault](#step-1-keep-secrets-out-of-llm-context-det), [1Password](#step-2-use-a-real-vault-det) |
 | **Tool blocklist** | Runtime prevents call regardless of prompt. | Claude Code `blockedTools`, OpenClaw `allowedCommands` |
@@ -158,7 +158,8 @@ Organized deterministic-first, probabilistic-later — matching the analysis abo
 
 *Network-level controls: sandboxes, allowlists, and OS hardening.*
 
-- **[NemoClaw](https://github.com/NVIDIA/NemoClaw)** 🦞 ![](https://img.shields.io/github/stars/NVIDIA/NemoClaw?style=flat-square&label=%E2%98%85) — NVIDIA's enterprise OpenClaw security stack (GTC March 2026). **OpenShell** sandbox with policy-based security & network guardrails. **Privacy router** for cloud models. Runs locally on RTX/DGX.
+- **[OpenShell](https://github.com/NVIDIA/OpenShell)** 🦞 ![](https://img.shields.io/github/stars/NVIDIA/OpenShell?style=flat-square&label=%E2%98%85) — NVIDIA's standalone sandbox runtime for any AI agent. Out-of-process policy enforcement (network allowlist, filesystem isolation, inference calls) via declarative YAML — security checks live outside the agent process so a compromised agent can't bypass them.
+- **[NemoClaw](https://github.com/NVIDIA/NemoClaw)** 🦞 ![](https://img.shields.io/github/stars/NVIDIA/NemoClaw?style=flat-square&label=%E2%98%85) — NVIDIA plugin + blueprint that runs **[OpenClaw](https://github.com/openclawai/openclaw)** agents inside OpenShell. Wires up Nemotron local inference, a privacy router for cloud models, and network policy in one command. OpenShell is the engine; NemoClaw is the wiring for OpenClaw specifically.
 - **[IronShell](https://github.com/Surfing-Claw/IronShell)** 🦞 ![](https://img.shields.io/github/stars/Surfing-Claw/IronShell?style=flat-square&label=%E2%98%85) — AWS CDK hardened hosting. Zero open ports, Tailscale VPN, time-limited secrets via AWS Secrets Manager.
 - **[IronClaw](https://github.com/nearai/ironclaw)** 🦞 ![](https://img.shields.io/github/stars/nearai/ironclaw?style=flat-square&label=%E2%98%85) — Rust AI assistant. AES-256-GCM, WASM sandbox, URL allowlist, active leak detection on all I/O.
 
